@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modal overlay</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        width: 100%;
+        font-family: "Poppins", sans-serif;
+        text-align: center;
+      }
+
+      button {
+        font-family: "Poppins", sans-serif;
+        font-size: 1.6rem;
+        background-color: steelblue;
+        color: aliceblue;
+        border: none;
+        cursor: pointer;
+        border-radius: 0.4rem;
+        padding: 1rem;
+      }
+
+      .flex {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3rem;
+      }
+
+      .container {
+        position: relative;
+        height: 100%;
+        background-color: mintcream;
+        font-size: 1.3rem;
+        line-height: 1.6;
+        font-family: "Poppins", sans-serif;
+      }
+
+      /* .show,
+      .accept {
+        padding: 0.5rem;
+      } */
+
+      .accept {
+        background-color: yellowgreen;
+      }
+
+      .close {
+        position: relative;
+        background-color: orangered;
+        margin-right: auto;
+        height: 2.8rem;
+        width: 2.8rem;
+        padding: 0;
+      }
+
+      .close::before,
+      .close::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 2rem;
+        height: 4px;
+        background-color: mintcream;
+        transform: translate3d(-50%, -50%, 0) rotate(45deg);
+      }
+
+      .close::after {
+        transform: translate3d(-50%, -50%, 0) rotate(135deg);
+      }
+
+      .modal-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgba(69, 100, 126, 0.5);
+      }
+      .modal {
+        position: relative;
+        width: 35rem;
+        flex-direction: column;
+        background-color: steelblue;
+        padding: 2.8rem;
+        color: mintcream;
+      }
+
+      .modal-container,
+      .accepted {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container flex">
+      <button class="show">Show offer</button>
+      <div class="modal-container flex">
+        <div class="modal flex">
+          <button class="close"></button>
+          <p class="offer-text">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti
+            eligendi error iure laudantium ea minima odio excepturi possimus
+            voluptates dolore.
+          </p>
+          <button class="accept">Accept offer</button>
+        </div>
+      </div>
+      <div class="accepted">Offer accepted!</div>
+    </div>
+  </body>
+  <script>
+    const showButton = document.querySelector(".show");
+    const modal = document.querySelector(".modal-container");
+    const close = document.querySelector(".close");
+    const accepted = document.querySelector(".accepted");
+
+    function closeModal(ev, callback) {
+      const acceptButton = document.querySelector(".accept");
+      if (ev.target === acceptButton) {
+        modal.style.display = "none";
+        showButton.style.display = "none";
+        accepted.style.display = "block";
+      }
+      if (ev.target === modal || ev.target === close) {
+        modal.style.display = "none";
+      }
+      return;
+      // callback for disabling show button
+    }
+
+    function showModal(ev) {
+      modal.style.display = "flex";
+      modal.addEventListener("click", closeModal);
+      // set show button to disabled
+    }
+
+    showButton.addEventListener("click", showModal);
+  </script>
+</html>
