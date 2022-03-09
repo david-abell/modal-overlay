@@ -2,6 +2,8 @@
 
 A simple modal overlay built using html, css and javascript.
 
+Test it out on the demo page [https://david-abell.github.io/modal-overlay/](https://david-abell.github.io/modal-overlay/)
+
 ## Why I built this
 
 Exercise project to showcase practical front end skills.
